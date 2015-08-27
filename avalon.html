@@ -7,46 +7,35 @@
     <script src="js/lib/avalon.js"></script>
 </head>
 <body>
-<div class="pager" ms-controller="pagerCtrl" ms-visible="show">
+<div class="pager hidden-xs" ms-controller="pagerCtrl" ms-visible="show">
     <a class="first" ms-click="toFirst">首页</a>
     <a class="pre" ms-click="toPre">上页</a>
-    <a ms-repeat-el="list" ms-click="toNum(el.index,$index)" ms-class="{{el.style}}">{{el.index}}</a>
+    <a class="page" ms-repeat-el="list" ms-click="toNum(el+$index+n,$index)" ms-class="active:$index==index">{{el+$index+n}}</a>
     <a class="next" ms-click="toNext">下页</a>
     <a class="last" ms-click="toLast">末页</a>
-    <a>第{{pageNo}}页</a>
-    <a>共{{totalPage}}页</a>
+    <a class="pageNo">第{{pageNo}}页</a>
+    <a class="totalPage">共{{totalPage}}页</a>
 </div>
 <script src="js/pagerCtrl.js"></script>
 <script>
 //正式
-//    function getData(pageNo, pageSize, cb) {
+//    function getData(pageNo, pageSize) {
 //        $.ajax({
 //            url:'',
 //            dataType:'json'
 //        }).done(function(data){
-//        pagerCtrl.totalPage = data.totalPage;
-//        pagerCtrl.firstPage = data.firstPage;
-//        pagerCtrl.lastPage = data.lastPage;
-//        pagerCtrl.totalCount = data.totalCount;
+//        pagerCtrl.setList(data.totalPage)
 //        });
 //    }
-//    pagerCtrl.fn = getData;
-//    pagerCtrl.setList(10);//设置要显示几页
 
-    //测试
-    function getDataTest(pageNo, pageSize, cb) {
-        var pageNo = 1;
-        pagerCtrl.totalPage = 20;
-        pagerCtrl.firstPage = true;
-        pagerCtrl.lastPage = false;
-        pagerCtrl.totalCount = 5;
-        return function () {
-            pagerCtrl.pageNo = (pageNo++);
-        };
+//测试
+    function getDataTest(pageNo, pageSize) {
+        var totalPage = 15;
+        pagerCtrl.setList(totalPage)
     }
-    var a=getDataTest;
-    pagerCtrl.fn = a();
-    pagerCtrl.setList(10);
+
+pagerCtrl.init(10, 10, getDataTest);
+pagerCtrl.getData(1);
 </script>
 </body>
 </html>

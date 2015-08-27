@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/lib/angular.js"></script>
+</head>
+<body ng-app="myApp">
+<div class="pager" ng-controller="pagerCtrl">
+    <a class="first" ng-click="toFirst">首页</a>
+    <a class="pre" ng-click="toPre">上页</a>
+    <a class="page" ms-repeat-el="list" ng-click="toNum(el.index,$index)" ms-class="{{el.style}}">{{el.index}}</a>
+    <a class="next" ng-click="toNext">下页</a>
+    <a class="last" ng-click="toLast">末页</a>
+    <a class="pageNo">第{{pageNo}}页</a>
+    <a class="totalPage">共{{totalPage}}页</a>
+</div>
+</body>
+</html>
